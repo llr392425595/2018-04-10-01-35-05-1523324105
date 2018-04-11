@@ -11,5 +11,20 @@
 
 <div>${message}</div>
 
+<table>
+  <tr>
+    <th>编号</th>
+    <th>姓名</th>
+    <th>年龄</th>
+    <th>性别</th>
+  </tr>
+  <tr th:each="employee : ${employees}">
+    <td th:text="${employee.id}"></td>
+    <td th:text="${employee.name}"></td>
+    <td th:text="${employee.age}"></td>
+    <td th:text="${employee.gender}"></td>
+  </tr>
+</table>
+
 </body>
 </html>
