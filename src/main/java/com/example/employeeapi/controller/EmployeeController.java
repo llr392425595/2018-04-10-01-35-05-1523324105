@@ -1,6 +1,8 @@
 package com.example.employeeapi.controller;
 
 import com.example.employeeapi.datasource.EmployeeRepository;
+import com.example.employeeapi.model.Employee;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,8 @@ public class EmployeeController {
     String getEmployees(Model model) {
 
         model.addAttribute("message", "hello world");
+        List<Employee> employees =  employeeRepository.getAllEmployees();
+        model.addAttribute("employees", employees);
 
         return "employees";
     }
