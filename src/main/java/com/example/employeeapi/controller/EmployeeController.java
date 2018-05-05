@@ -13,23 +13,21 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @EnableAutoConfiguration
+@RequestMapping(value = "/employees")
 public class EmployeeController {
-    @Autowired
-    private EmployeeRepository employeeRepository;
 
-    @RequestMapping("/employees")
-    String getEmployees(Model model) {
+  @Autowired
+  private EmployeeRepository employeeRepository;
 
-        model.addAttribute("message", "hello world");
-        List<Employee> employees =  employeeRepository.getAllEmployees();
-        model.addAttribute("employees", employees);
+  @GetMapping(value = "")
+  String getEmployees(Model model) {
+    List<Employee> employees = employeeRepository.getAllEmployees();
+    model.addAttribute("employees", employees);
+    return "employees";
+  }
 
-        return "employees";
-    }
-
-
-    @GetMapping("/employees/{id}")
-    ResponseEntity getEmployee(@PathVariable("id") int id) {
-        return new ResponseEntity<>(employeeRepository.getEmployee(id), HttpStatus.OK);
-    }
+  @GetMapping("/{id}")
+  ResponseEntity getEmployee(@PathVariable("id") int id) {
+    return new ResponseEntity<>(employeeRepository.getEmployee(id), HttpStatus.OK);
+  }
 }
